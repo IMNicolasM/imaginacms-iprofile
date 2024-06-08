@@ -5,14 +5,15 @@
     "description": "",
     "keywords": [],
     "active": 1,
-    "priority": 1,
+    "priority": 5,
     "providers": [
         "Modules\\Iprofile\\Providers\\IprofileServiceProvider",
-        "Modules\\Iprofile\\Providers\\RouteServiceProvider"
+        "Modules\\Iprofile\\Providers\\RouteServiceProvider",
+        "Modules\\Iprofile\\Providers\\EventServiceProvider"
     ],
     "aliases": {},
     "files": [
-
+        "helpers.php"
     ],
     "requires": []
 }

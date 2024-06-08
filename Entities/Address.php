@@ -2,9 +2,9 @@
 
 namespace Modules\Iprofile\Entities;
 
-use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;
-use Modules\Fhia\Entities\BranchOffice;
+use Modules\Ilocations\Entities\Country;
+use Modules\Ilocations\Entities\Province;
 use Modules\User\Entities\Sentinel\User;
 
 class Address extends Model
@@ -30,16 +30,54 @@ class Address extends Model
       'neighborhood_id',
       'type',
       'default',
+      'lat',
+      'lng',
+      'warehouse_id',
       'options'
     ];
-  
+
   protected $fakeColumns = ['options'];
-  
+
   protected $casts = [
     'options' => 'array'
   ];
-  
+
+
   public function user(){
-    $this->belognsTo(User::class);
+    return $this->belongsTo(User::class);
   }
+
+  public function countryIso2(){
+    return $this->belongsTo(Country::class, 'country', 'iso_2');
+  }
+
+  public function provinceIso2(){
+    return $this->belongsTo(Province::class, 'state', 'iso_2');
+  }
+
+
+  public function setOptionsAttribute($value)
+  {
+    $this->attributes['options'] = json_encode($value);
+  }
+
+
+  public function getOptionsAttribute($value)
+  {
+    return json_decode($value);
+  }
+
+   /**
+   * Relation with Icommerce Warehouse
+   */
+  public function warehouse()
+  {
+
+    if (is_module_enabled('Icommerce')) {
+      return $this->belongsTo("Modules\Icommerce\Entities\Warehouse");
+    }
+    return null;
+
+  }
+
 }
