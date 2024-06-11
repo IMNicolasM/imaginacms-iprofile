@@ -6,11 +6,13 @@ use Illuminate\Queue\SerializesModels;
 
 class UserUpdatedEvent
 {
-  use SerializesModels;
-  public $user;
+    use SerializesModels;
 
-  public function __construct($user)
-  {
-    $this->user = $user;
-  }
+    public $user;
+
+    public function __construct($user, $bindings)
+    {
+        $this->user = $user;
+        $this->bindings = $bindings;
+    }
 }
