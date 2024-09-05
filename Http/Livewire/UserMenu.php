@@ -9,7 +9,6 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 class UserMenu extends Component
 {
   public $view;
-  public $user;
   public $params;
   public $showLabel;
   public $moduleLinks;
@@ -21,10 +20,10 @@ class UserMenu extends Component
   public $profileRoute;
   public $openLoginInModal;
   public $openRegisterInModal;
-  protected $authApiController;
   public $label;
   public $classUser;
   public $styleUser;
+
   
   public function mount($layout = 'user-menu-layout-1', $showLabel = false, $ident = "userMenuComponent",
                               $params = [], $openLoginInModal = true, $openRegisterInModal = false,
@@ -128,14 +127,14 @@ class UserMenu extends Component
   
   public function render()
   {
-    $this->user = null;
-    $this->authApiController = app("Modules\Iprofile\Http\Controllers\Api\AuthApiController");
+    $userData = null;
+    $authApiController = app("Modules\Iprofile\Http\Controllers\Api\AuthApiController");
     if (\Auth::user()) {
-      $user = $this->authApiController->me();
+      $user = $authApiController->me();
       $user = json_decode($user->getContent());
-      $this->user['data'] = $user->data->userData;
+      $userData['data'] = $user->data->userData;
     }
     
-    return view($this->view);
+    return view($this->view, ["user" => $userData]);
   }
 }
