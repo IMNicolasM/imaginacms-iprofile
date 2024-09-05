@@ -48,9 +48,9 @@ class UserMenu extends Component
   
   }
   
-  public function reload(){
+  public function reload($currentUrl){
   
-    
+   
     $modules = app('modules')->allEnabled();
   
     $this->moduleLinks = [];
@@ -68,7 +68,7 @@ class UserMenu extends Component
       $moduleLinksCfg = config('asgard.' . strtolower($name) . '.config.userMenuLinks');
 
       if (!empty($moduleLinksCfg)) {
-     
+        
         foreach ($moduleLinksCfg as &$moduleLink) {
         
           //Check if show or not de Link
@@ -86,7 +86,7 @@ class UserMenu extends Component
           ) {
             
             if ($this->panel == "quasar" && isset($moduleLink['quasarUrl'])) {
-              $moduleLink['url'] = $moduleLink['quasarUrl'] . "?redirectTo=" . url()->current();
+              $moduleLink['url'] = $moduleLink['quasarUrl'] . "?redirectTo=" . $currentUrl["href"];
             } else
               if (!isset($moduleLink['url'])) {
                 $routeWithLocale = $locale . '.' . $moduleLink['routeName'];
@@ -98,7 +98,7 @@ class UserMenu extends Component
                   $moduleLink['url'] = \URL::to('/');
               
               }
-          
+           
             if (isset($moduleLink["showInMenuWithoutSession"]) && $moduleLink["showInMenuWithoutSession"])
               $this->moduleLinksWithoutSession[] = $moduleLink;
             else

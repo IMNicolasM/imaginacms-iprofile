@@ -1,4 +1,4 @@
-<div wire:init="reload" id="{{ $ident }}" class="d-block py-2">
+<div wire:init="reload(window.location)" id="{{ $ident }}" class="d-block py-2">
   
   <!--- LOGIN -->
     @if($user)
