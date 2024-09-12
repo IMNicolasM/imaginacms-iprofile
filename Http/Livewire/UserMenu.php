@@ -125,6 +125,12 @@ class UserMenu extends Component
     ];
   }
   
+  public function logout()
+  {
+    $authProfileController = app("Modules\Iprofile\Http\Controllers\AuthProfileController");
+    return $authProfileController->getLogout();
+  }
+
   public function render()
   {
     $userData = null;

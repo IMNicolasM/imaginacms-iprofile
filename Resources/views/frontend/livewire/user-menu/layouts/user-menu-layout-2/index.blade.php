@@ -17,7 +17,7 @@
             </li>
           @endforeach
           <li class="nav-item">
-            <a  href="{{url('/account/logout')}}" data-placement="bottom"
+            <a class="cursor-pointer" wire:click="logout" data-placement="bottom"
                title="Sign Out">
               <i class="fas fa-sign-out-alt mr-1"></i>
               <span class="nav-label">{{trans('iprofile::frontend.button.sign_out')}}</span>

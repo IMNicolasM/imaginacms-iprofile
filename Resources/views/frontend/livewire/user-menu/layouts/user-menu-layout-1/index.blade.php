@@ -51,7 +51,7 @@
                         @if($link['icon'])<i class="{{ $link['icon'] }}"></i>@endif {{ trans($link['title']) }}
                     </a>
                 @endforeach
-                <a class="dropdown-item" href="{{url('/account/logout')}}" data-placement="bottom"
+                <a class="dropdown-item cursor-pointer" wire:click="logout" data-placement="bottom"
                    title="Sign Out">
                     <i class="fas fa-sign-out-alt mr-1"></i>
                     <span>{{trans('iprofile::frontend.button.sign_out')}}</span>
