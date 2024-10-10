@@ -1,20 +1,19 @@
 <?php
 
 if (!function_exists('createOrUpdateRole')) {
-    function createOrUpdateRole(array $role)
-    {
-        $profileRoleRepository = app("Modules\Iprofile\Repositories\RoleApiRepository");
+  function createOrUpdateRole(array $role)
+  {
+    $profileRoleRepository = app("Modules\Iprofile\Repositories\RoleApiRepository");
 
-        // Search Role
-        $params = ["filter" => ["field" => "slug"],"include" => [],"fields" => []];
-        $existRole = $profileRoleRepository->getItem($role['slug'], json_decode(json_encode($params)));
+    // Search Role
+    $params = ["filter" => ["field" => "slug"], "include" => [], "fields" => []];
+    $userRole  = $profileRoleRepository->getItem($role['slug'], json_decode(json_encode($params)));
 
-        //Create / Update
-        if (!isset($existRole->id))
-            $result = $profileRoleRepository->create($role);
-        else
-            $result = $profileRoleRepository ->updateBy($existRole->id,$role);
-        
-        return $result;
-    }
+    //Create / Update
+    if (!isset($userRole->id))
+      $result = $profileRoleRepository->create($role);
+    else
+        $result = $profileRoleRepository->updateBy($userRole->id, $role);
+    return $result;
+  }
 }
