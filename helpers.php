@@ -13,11 +13,7 @@ if (!function_exists('createOrUpdateRole')) {
     if (!isset($userRole->id))
       $result = $profileRoleRepository->create($role);
     else
-      if ($userRole->slug != 'user') {
         $result = $profileRoleRepository->updateBy($userRole->id, $role);
-      } else {
-        return [];
-      }
     return $result;
   }
 }
